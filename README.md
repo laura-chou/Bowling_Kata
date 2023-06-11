@@ -2,7 +2,6 @@
 ### 關於這個套路
 #### 參考
 - [Coding Dojo](https://codingdojo.org/kata/Bowling/)
-- [Uncle Bob](http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata)
 - [維基百科](https://zh.wikipedia.org/zh-tw/%E4%BF%9D%E9%BD%A1%E7%90%83)
 
 <hr>
@@ -86,48 +85,40 @@
   - Spare 可再投擲一球得 10 分
   - 總得分 158 分 ( 138 + 6 + 4 + 10 )
 
-### code design
-| class | methods |
-| :----: | :----: |
-| Game | + roll (pins:int)<br>+ score():int |
-#### class 名稱為 Game，它有兩個 methods
-#### roll (pins : int)：每投擲 1 顆球就呼叫此方法一次，參數為當球擊倒的瓶數
-#### score()：所有球打完後呼叫此方法，會回傳總分，型態為 int
-
 ### 測試案例
 #### `全部洗溝 (Gutter Game)`
-| 計分板 | 分數 |
+| frame | score |
 | :----: | :----: |
 | -- -- -- -- -- -- -- -- -- -- | 0 |
 
 #### `每次投球都沒有擊倒球瓶 (All row not knocked down all pins)`
-| 計分板 | 分數 |
+| frame | score |
 | :----: | :----: |
 | 11 11 11 11 11 11 11 11 11 11 | 20 |
 | 9- 9- 9- 9- 9- 9- 9- 9- 9- 9- | 90 |
 | 43 81 72 22 41 35 23 72 14 62 | 69 |
 
 #### `每球都擊倒10瓶 (Perfect Game)`
-| 計分板 | 分數 |
+| frame | score |
 | :----: | :----: |
 | X X X X X X X X X X X XXX | 300 |
 
 ### `發生一次 Strike (One Strike)`
-| 計分板 | 分數 |
+| frame | score |
 | :----: | :----: |
 | X 11 11 11 11 11 11 11 11 11 | 30 |
 | 11 11 11 X 11 11 11 11 11 11 | 30 |
 | 11 11 11 11 11 11 11 11 11 X26 | 36 |
 
 ### `發生一次 Spare (One Spare)`
-| 計分板 | 分數 |
+| frame | score |
 | :----: | :----: |
 | 8/ 11 11 11 11 11 11 11 11 11 | 29 |
 | 11 11 3/ 11 11 11 11 11 11 11 | 29 |
 | 11 11 11 11 11 11 11 11 11 2/9 | 37 |
 
 ### `隨機賽局 (Random game)`
-| 計分板 | 分數 |
+| frame | score |
 | :----: | :----: |
 | 52 8/ X 9- X X -/ 81 6/ 6/X | 158 |
 | 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5 | 150 |
