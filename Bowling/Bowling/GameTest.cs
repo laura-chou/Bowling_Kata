@@ -19,6 +19,13 @@ namespace Bowling
         {
             AssertResultShouldReturn(input, expected);
         }
+        
+        [Test]
+        [TestCase("11 11 11 11 11 11 11 11 11 11", 20)]
+        public void A02_AllRowNotKnockedDownAllPins(string input, int expected)
+        {
+            AssertResultShouldReturn(input, expected);
+        }
 
         private void AssertResultShouldReturn(string input, int expected)
         {
