@@ -4,7 +4,7 @@
     {
         public int ShowResult(string input)
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }
