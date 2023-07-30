@@ -8,7 +8,8 @@
             var symbolMapper = new Dictionary<char, int>
             {
                 { '-', 0 },
-                { '1', 1 }
+                { '1', 1 },
+                { '9', 9 }
             };
 
             var sum = frame.Sum(roll => symbolMapper[roll[0]] + symbolMapper[roll[1]]);
