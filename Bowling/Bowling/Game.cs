@@ -11,12 +11,7 @@
                 { '1', 1 }
             };
 
-            var sum = 0;
-
-            foreach (var item in frame)
-            {
-                sum += symbolMapper[item[0]] + symbolMapper[item[1]];
-            }
+            var sum = frame.Sum(row => symbolMapper[row[0]] + symbolMapper[row[1]]);
 
             return sum;
         }
