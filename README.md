@@ -91,7 +91,7 @@
 | :----: | :----: |
 | -- -- -- -- -- -- -- -- -- -- | 0 |
 
-#### `每次投球都沒有擊倒球瓶 (All row not knocked down all pins)`
+#### `每次投球都沒有擊倒球瓶 (All roll not knocked down all pins)`
 | frame | score |
 | :----: | :----: |
 | 11 11 11 11 11 11 11 11 11 11 | 20 |

@@ -11,7 +11,7 @@
                 { '1', 1 }
             };
 
-            var sum = frame.Sum(row => symbolMapper[row[0]] + symbolMapper[row[1]]);
+            var sum = frame.Sum(roll => symbolMapper[roll[0]] + symbolMapper[roll[1]]);
 
             return sum;
         }

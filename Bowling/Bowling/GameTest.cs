@@ -22,7 +22,7 @@ namespace Bowling
         
         [Test]
         [TestCase("11 11 11 11 11 11 11 11 11 11", 20)]
-        public void A02_AllRowNotKnockedDownAllPins(string input, int expected)
+        public void A02_AllRollNotKnockedDownAllPins(string input, int expected)
         {
             AssertResultShouldReturn(input, expected);
         }
