@@ -22,6 +22,7 @@ namespace Bowling
         
         [Test]
         [TestCase("11 11 11 11 11 11 11 11 11 11", 20)]
+        [TestCase("9- 9- 9- 9- 9- 9- 9- 9- 9- 9-", 90)]
         public void A02_AllRollNotKnockedDownAllPins(string input, int expected)
         {
             AssertResultShouldReturn(input, expected);
