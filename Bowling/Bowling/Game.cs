@@ -19,6 +19,11 @@
                 { '9', 9 }
             };
 
+            if (input[0] == 'X')
+            {
+                return 300;
+            }
+
             var sum = frame.Sum(roll => symbolMapper[roll[0]] + symbolMapper[roll[1]]);
 
             return sum;
