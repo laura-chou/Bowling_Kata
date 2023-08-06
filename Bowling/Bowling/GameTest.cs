@@ -29,7 +29,7 @@ namespace Bowling
             AssertResultShouldReturn(input, expected);
         }
         
-        [TestCase("X X X X X X X X X X X XXX", 300)]
+        [TestCase("X X X X X X X X X XXX", 300)]
         public void A03_PerfectGame(string input, int expected)
         {
             AssertResultShouldReturn(input, expected);

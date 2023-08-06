@@ -101,7 +101,7 @@
 #### `每球都擊倒10瓶 (Perfect Game)`
 | frame | score |
 | :----: | :----: |
-| X X X X X X X X X X X XXX | 300 |
+| X X X X X X X X X XXX | 300 |
 
 ### `發生一次 Strike (One Strike)`
 | frame | score |
