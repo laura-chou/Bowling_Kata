@@ -1,6 +1,6 @@
 ﻿namespace Bowling
 {
-    public class Rolls
+    public class Roll
     {
         public int Pins { get; set; }
     }

@@ -2,8 +2,7 @@
 {
     public class Game
     {
-        internal Rolls Roll1 { get; private set; }
-        internal Rolls Roll2 { get; private set; }
+        public List<Roll> Rolls { get; private set; }
 
         public int ShowResult(string input)
         {
@@ -20,20 +19,23 @@
             }
             var game = frame.Select(roll => new Game
             {
-                Roll1 = new Rolls
+                Rolls = new List<Roll>
                 {
-                    Pins = symbolMapper.ContainsKey(roll[0].ToString()) 
-                    ? symbolMapper[roll[0].ToString()]
-                    : int.Parse(roll[0].ToString())
-                },
-                Roll2 = new Rolls
-                {
-                    Pins = symbolMapper.ContainsKey(roll[1].ToString())
-                    ? symbolMapper[roll[1].ToString()]
-                    : int.Parse(roll[1].ToString())
+                    new Roll 
+                    {
+                        Pins = symbolMapper.ContainsKey(roll[0].ToString())
+                        ? symbolMapper[roll[0].ToString()]
+                        : int.Parse(roll[0].ToString())
+                    },
+                    new Roll
+                    {
+                        Pins = symbolMapper.ContainsKey(roll[1].ToString())
+                        ? symbolMapper[roll[1].ToString()]
+                        : int.Parse(roll[1].ToString())
+                    }
                 }
             });
-            var sum = game.Sum(rolls => rolls.Roll1.Pins + rolls.Roll2.Pins);
+            var sum = game.Sum(rolls => rolls.Rolls.Sum(roll => roll.Pins));
 
             return sum;
         }
