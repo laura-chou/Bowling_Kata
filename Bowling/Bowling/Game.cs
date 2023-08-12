@@ -8,36 +8,34 @@
         {
             var frame = input.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
 
+            if (input[0] == 'X')
+            {
+                return 300;
+            }
+            var game = frame.Select(rolls => new Game
+            {
+                Rolls = GetRolls(rolls)
+            });
+            var sum = game.Sum(rolls => rolls.Rolls.Sum(roll => roll.Pins));
+
+            return sum;
+        }
+
+        private List<Roll> GetRolls(string rolls)
+        {
             var symbolMapper = new Dictionary<string, int>
             {
                 { "-", 0 }
             };
 
-            if (input[0] == 'X')
+            var rollList = rolls.Select(roll => new Roll
             {
-                return 300;
-            }
-            var game = frame.Select(roll => new Game
-            {
-                Rolls = new List<Roll>
-                {
-                    new Roll 
-                    {
-                        Pins = symbolMapper.ContainsKey(roll[0].ToString())
-                        ? symbolMapper[roll[0].ToString()]
-                        : int.Parse(roll[0].ToString())
-                    },
-                    new Roll
-                    {
-                        Pins = symbolMapper.ContainsKey(roll[1].ToString())
-                        ? symbolMapper[roll[1].ToString()]
-                        : int.Parse(roll[1].ToString())
-                    }
-                }
+                Pins = symbolMapper.ContainsKey(roll.ToString())
+                        ? symbolMapper[roll.ToString()]
+                        : int.Parse(roll.ToString())
             });
-            var sum = game.Sum(rolls => rolls.Rolls.Sum(roll => roll.Pins));
 
-            return sum;
+            return new List<Roll>(rollList);
         }
     }
 }
