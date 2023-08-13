@@ -42,6 +42,12 @@ namespace Bowling
         {
             AssertResultShouldReturn(input, expected);
         }
+        
+        [TestCase("8/ 11 11 11 11 11 11 11 11 11", 29)]
+        public void A05_OneSpare(string input, int expected)
+        {
+            AssertResultShouldReturn(input, expected);
+        }
 
         private void AssertResultShouldReturn(string input, int expected)
         {
