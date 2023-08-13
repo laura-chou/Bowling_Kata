@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Design;
+using System.Data.SqlTypes;
 
 namespace Bowling
 {
@@ -23,26 +24,32 @@ namespace Bowling
         private int CalculateScore(List<Game> game)
         {
             var score = 0;
-            int index = 0;
-            foreach (var rolls in game)
+            game.ForEach(rolls => rolls.Rolls.ForEach(roll =>
             {
-                foreach(var roll in rolls.Rolls)
-                {
-                    var totalRoll = rolls.Rolls.Count;
-                    score += roll.Pins;
-                    // 如果只有一球而且是Strike
-                    if (totalRoll == 1 && roll.Pins == 10 && index != 9)
-                    {
-                        // 加上下兩球
-                        score += game[index + 1].Rolls[0].Pins;
-                        score += (index != 8)
-                                ? game[index + 2].Rolls[0].Pins
-                                : game[index + 1].Rolls[1].Pins;
-                    }
-                }
-                index++;
-            }
+                score += roll.Pins + GetBonus(game, rolls, roll);
+            }));
 
+            return score;
+        }
+
+        private int GetBonus(List<Game> game, Game rolls, Roll roll)
+        {
+            var totalRoll = rolls.Rolls.Count;
+            var index = 0;
+            var score = 0;
+
+            // 如果只有一球而且是Strike
+            if (totalRoll == 1 && roll.Pins == 10 && index != 9)
+            {
+                // 加上下兩球
+                score += game[index + 1].Rolls[0].Pins;
+                score += (index != 8)
+                        ? game[index + 2].Rolls[0].Pins
+                        : game[index + 1].Rolls[1].Pins;
+            }
+            
+            index++;
+            
             return score;
         }
 
