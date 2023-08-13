@@ -37,6 +37,7 @@ namespace Bowling
 
         [TestCase("X 11 11 11 11 11 11 11 11 11", 30)]
         [TestCase("11 11 11 X 11 11 11 11 11 11", 30)]
+        [TestCase("11 11 11 11 11 11 11 11 11 X26", 36)]
         public void A04_OneStrike(string input, int expected)
         {
             AssertResultShouldReturn(input, expected);
