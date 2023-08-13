@@ -35,6 +35,12 @@ namespace Bowling
             AssertResultShouldReturn(input, expected);
         }
 
+        [TestCase("X 11 11 11 11 11 11 11 11 11", 30)]
+        public void A04_OneStrike(string input, int expected)
+        {
+            AssertResultShouldReturn(input, expected);
+        }
+
         private void AssertResultShouldReturn(string input, int expected)
         {
             var actual = _game.ShowResult(input);
