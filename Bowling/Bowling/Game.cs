@@ -64,7 +64,7 @@ namespace Bowling
             {
                 { "-", 0 },
                 { "X", 10 },
-                { "/", 2 }
+                { "/", 10 }
             };
 
             var rollList = rolls.Select(roll => new Roll
@@ -72,8 +72,13 @@ namespace Bowling
                 Pins = symbolMapper.ContainsKey(roll.ToString())
                         ? symbolMapper[roll.ToString()]
                         : int.Parse(roll.ToString())
-            });
+            }).ToList();
 
+            if (rollList.Sum(roll => roll.Pins) > 10 && rollList.Count == 2)
+            {
+                rollList[1].Pins = rollList[1].Pins - rollList[0].Pins;
+            }
+            
             return new List<Roll>(rollList);
         }
     }
