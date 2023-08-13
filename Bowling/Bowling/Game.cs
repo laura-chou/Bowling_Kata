@@ -47,7 +47,12 @@ namespace Bowling
                         ? game[index + 2].Rolls[0].Pins
                         : game[index + 1].Rolls[1].Pins;
             }
-            
+            // 如果是 Spare
+            if (totalRoll == 2 && roll.Pins == 2 && rolls.Rolls.Sum(roll => roll.Pins) == 10)
+            {
+                score += 1;
+            }
+
             index++;
             
             return score;
@@ -58,7 +63,8 @@ namespace Bowling
             var symbolMapper = new Dictionary<string, int>
             {
                 { "-", 0 },
-                { "X", 10}
+                { "X", 10 },
+                { "/", 2 }
             };
 
             var rollList = rolls.Select(roll => new Roll
