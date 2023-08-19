@@ -48,9 +48,9 @@ namespace Bowling
                         : game[index + 1].Rolls[1].Pins;
             }
             // 如果是 Spare
-            if (totalRoll == 2 && roll.Pins == 2 && rolls.Rolls.Sum(roll => roll.Pins) == 10)
+            if (totalRoll == 2 && rolls.Rolls[1].Pins == roll.Pins && rolls.Rolls.Sum(roll => roll.Pins) == 10)
             {
-                score += 1;
+                score += game[index + 1].Rolls[0].Pins;
             }
 
             index++;
