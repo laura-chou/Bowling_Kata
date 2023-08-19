@@ -74,7 +74,7 @@ namespace Bowling
                         : int.Parse(roll.ToString())
             }).ToList();
 
-            if (rollList.Sum(roll => roll.Pins) > 99 && rollList.Count == 2)
+            if (rollList.Sum(roll => roll.Pins) > 99 && rollList.Count >= 2)
             {
                 rollList[1].Pins = 10 - rollList[0].Pins;
             }
