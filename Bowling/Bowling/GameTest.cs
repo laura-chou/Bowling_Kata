@@ -44,6 +44,7 @@ namespace Bowling
         }
         
         [TestCase("8/ 11 11 11 11 11 11 11 11 11", 29)]
+        [TestCase("11 11 3/ 11 11 11 11 11 11 11", 29)]
         public void A05_OneSpare(string input, int expected)
         {
             AssertResultShouldReturn(input, expected);
