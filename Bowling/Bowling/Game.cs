@@ -1,19 +1,20 @@
 ﻿using System.ComponentModel.Design;
 using System.Data.SqlTypes;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Bowling
 {
     public class Game
     {
-        public List<Roll> Rolls { get; private set; }
-
         public int ShowResult(string input)
         {
             var frame = input.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            var game = frame.Select(rolls => new Game
+            var game = frame.Select(rolls => new Rolls
             {
-                Rolls = GetRolls(rolls)
+                Roll1 = GetRoll(rolls, 1),
+                Roll2 = GetRoll(rolls, 2),
+                Roll3 = GetRoll(rolls, 3)
             }).ToList();
 
             var sum = CalculateScore(game);
@@ -21,44 +22,45 @@ namespace Bowling
             return sum;
         }
 
-        private int CalculateScore(List<Game> game)
+        private int CalculateScore(List<Rolls> game)
         {
             var score = 0;
-            game.ForEach(rolls => rolls.Rolls.ForEach(roll =>
+            var index = 1;
+
+            game.ForEach(rolls =>
             {
-                score += roll.Pins + GetBonus(game, rolls, roll);
-            }));
+                score += index < 10 ? rolls.Roll1.Pins + (rolls.Roll2 != null ? rolls.Roll2.Pins : 0) + GetBonus(game, index) : rolls.Roll1.Pins + rolls.Roll2.Pins + (rolls.Roll3 != null ? rolls.Roll3.Pins : 0);
+                index++;
+            });
 
             return score;
         }
 
-        private int GetBonus(List<Game> game, Game rolls, Roll roll)
+        private int GetBonus(List<Rolls> game, int index)
         {
-            var totalRoll = rolls.Rolls.Count;
-            var index = 0;
-            var score = 0;
-
+            var bonus = 0;
             // 如果只有一球而且是Strike
-            if (totalRoll == 1 && roll.Pins == 10 && index != 9)
+            if (game[index - 1].Roll2 == null)
             {
                 // 加上下兩球
-                score += game[index + 1].Rolls[0].Pins;
-                score += (index != 8)
-                        ? game[index + 2].Rolls[0].Pins
-                        : game[index + 1].Rolls[1].Pins;
-            }
-            // 如果是 Spare
-            if (totalRoll == 2 && rolls.Rolls[1].Pins == roll.Pins && rolls.Rolls.Sum(roll => roll.Pins) == 10)
+                bonus += game[index].Roll1.Pins;
+                bonus += game[index].Roll2 == null
+                    ? game[index + 1].Roll1.Pins
+                    : game[index].Roll2.Pins;
+            } 
+            else
             {
-                score += game[index + 1].Rolls[0].Pins;
+                // 如果是 Spare
+                if (game[index - 1].Roll1.Pins + game[index - 1].Roll2.Pins == 10)
+                {
+                    bonus += game[index].Roll1.Pins;
+                }
             }
 
-            index++;
-            
-            return score;
+            return bonus;
         }
 
-        private List<Roll> GetRolls(string rolls)
+        private Roll? GetRoll(string rolls, int roll)
         {
             var symbolMapper = new Dictionary<string, int>
             {
@@ -66,20 +68,22 @@ namespace Bowling
                 { "X", 10 },
                 { "/", 99 }
             };
-
-            var rollList = rolls.Select(roll => new Roll
-            {
-                Pins = symbolMapper.ContainsKey(roll.ToString())
-                        ? symbolMapper[roll.ToString()]
-                        : int.Parse(roll.ToString())
-            }).ToList();
-
-            if (rollList.Sum(roll => roll.Pins) > 99 && rollList.Count >= 2)
-            {
-                rollList[1].Pins = 10 - rollList[0].Pins;
-            }
             
-            return new List<Roll>(rollList);
+            if (rolls.Length >= roll)
+            {
+                var pins = symbolMapper.ContainsKey(rolls[roll - 1].ToString())
+                        ? symbolMapper[rolls[roll - 1].ToString()]
+                        : int.Parse(rolls[roll - 1].ToString());
+
+                if (pins == 99)
+                {
+                    pins = 10 - int.Parse(rolls[0].ToString());
+                }
+
+                return new Roll { Pins = pins };
+            }
+
+            return null;
         }
     }
 }
