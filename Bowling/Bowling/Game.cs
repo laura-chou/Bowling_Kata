@@ -68,32 +68,30 @@ namespace Bowling
 
         private Roll? GetRoll(string rolls, int roll)
         {
+            if (rolls.Length >= roll)
+            {
+                var pins = ConvertRollPins(rolls, roll - 1);
+
+                pins = pins == 99 ? 10 - ConvertRollPins(rolls, 0) : pins;
+
+                return new Roll { Pins = pins };
+            }
+
+            return null;
+        }
+
+        private int ConvertRollPins(string rolls, int roll)
+        {
             var symbolMapper = new Dictionary<string, int>
             {
                 { "-", 0 },
                 { "X", 10 },
                 { "/", 99 }
             };
-            
-            if (rolls.Length >= roll)
-            {
-                var pins = symbolMapper.ContainsKey(rolls[roll - 1].ToString())
-                        ? symbolMapper[rolls[roll - 1].ToString()]
-                        : int.Parse(rolls[roll - 1].ToString());
 
-                if (pins == 99)
-                {
-                    pins = 10 - 
-                        (symbolMapper.ContainsKey(rolls[0].ToString())
-                        ? symbolMapper[rolls[0].ToString()]
-                        : int.Parse(rolls[0].ToString()));
-
-                }
-
-                return new Roll { Pins = pins };
-            }
-
-            return null;
+            return symbolMapper.ContainsKey(rolls[roll].ToString())
+                    ? symbolMapper[rolls[roll].ToString()]
+                    : int.Parse(rolls[roll].ToString());
         }
     }
 }
