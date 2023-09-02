@@ -29,11 +29,17 @@ namespace Bowling
 
             game.ForEach(rolls =>
             {
-                score += index < 10 ? rolls.Roll1.Pins + (rolls.Roll2 != null ? rolls.Roll2.Pins : 0) + GetBonus(game, index) : rolls.Roll1.Pins + rolls.Roll2.Pins + (rolls.Roll3 != null ? rolls.Roll3.Pins : 0);
+                score += GetRollPins(rolls.Roll1) + GetRollPins(rolls.Roll2) 
+                        + (index < 10 ? GetBonus(game, index) : GetRollPins(rolls.Roll3));
                 index++;
             });
 
             return score;
+        }
+
+        private int GetRollPins(Roll? roll)
+        {
+            return roll != null ? roll.Pins : 0;
         }
 
         private int GetBonus(List<Rolls> game, int index)
@@ -43,17 +49,17 @@ namespace Bowling
             if (game[index - 1].Roll2 == null)
             {
                 // 加上下兩球
-                bonus += game[index].Roll1.Pins;
+                bonus += GetRollPins(game[index].Roll1);
                 bonus += game[index].Roll2 == null
-                    ? game[index + 1].Roll1.Pins
-                    : game[index].Roll2.Pins;
+                    ? GetRollPins(game[index + 1].Roll1)
+                    : GetRollPins(game[index].Roll2);
             } 
             else
             {
                 // 如果是 Spare
-                if (game[index - 1].Roll1.Pins + game[index - 1].Roll2.Pins == 10)
+                if (GetRollPins(game[index - 1].Roll1) + GetRollPins(game[index - 1].Roll2) == 10)
                 {
-                    bonus += game[index].Roll1.Pins;
+                    bonus += GetRollPins(game[index].Roll1);
                 }
             }
 
