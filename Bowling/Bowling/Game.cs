@@ -83,7 +83,11 @@ namespace Bowling
 
                 if (pins == 99)
                 {
-                    pins = 10 - int.Parse(rolls[0].ToString());
+                    pins = 10 - 
+                        (symbolMapper.ContainsKey(rolls[0].ToString())
+                        ? symbolMapper[rolls[0].ToString()]
+                        : int.Parse(rolls[0].ToString()));
+
                 }
 
                 return new Roll { Pins = pins };
