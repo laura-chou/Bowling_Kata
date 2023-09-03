@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.Design;
-using System.Data.SqlTypes;
-using static System.Formats.Asn1.AsnWriter;
-
-namespace Bowling
+﻿namespace Bowling
 {
     public class Game
     {
