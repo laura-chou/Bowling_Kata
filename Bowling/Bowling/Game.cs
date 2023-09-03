@@ -13,49 +13,59 @@
                 Roll3 = GetRoll(rolls, 3)
             }).ToList();
 
-            var sum = CalculateScore(game);
-
-            return sum;
+            return CalculateScore(game);
         }
 
         private int CalculateScore(List<Rolls> game)
         {
             var score = 0;
-            var index = 1;
+            var index = 0;
 
             game.ForEach(rolls =>
             {
-                score += GetRollPins(rolls.Roll1) + GetRollPins(rolls.Roll2) 
-                        + (index < 10 ? GetBonus(game, index) : GetRollPins(rolls.Roll3));
+                score += GetRollPins(rolls.Roll1) + GetRollPins(rolls.Roll2)
+                        + (index < 9 ? GetBonus(game, index) : GetRollPins(rolls.Roll3));
                 index++;
             });
 
             return score;
         }
 
-        private int GetRollPins(Roll? roll)
+        private int ConvertRollPins(string rolls, int index)
         {
-            return roll != null ? roll.Pins : 0;
+            var symbolMapper = new Dictionary<string, int>
+            {
+                { "-", 0 },
+                { "X", 10 },
+                { "/", 99 }
+            };
+
+            var str = rolls[index].ToString();
+
+            return symbolMapper.ContainsKey(str)
+                    ? symbolMapper[str]
+                    : int.Parse(str);
         }
 
         private int GetBonus(List<Rolls> game, int index)
         {
             var bonus = 0;
-            // 如果只有一球而且是Strike
-            if (game[index - 1].Roll2 == null)
+
+            // 如果是 Strike
+            if (game[index].Roll2 == null)
             {
                 // 加上下兩球
-                bonus += GetRollPins(game[index].Roll1);
-                bonus += game[index].Roll2 == null
-                    ? GetRollPins(game[index + 1].Roll1)
-                    : GetRollPins(game[index].Roll2);
-            } 
+                bonus += GetRollPins(game[index + 1].Roll1);
+                bonus += game[index + 1].Roll2 == null
+                    ? GetRollPins(game[index + 2].Roll1)
+                    : GetRollPins(game[index + 1].Roll2);
+            }
             else
             {
                 // 如果是 Spare
-                if (GetRollPins(game[index - 1].Roll1) + GetRollPins(game[index - 1].Roll2) == 10)
+                if (GetRollPins(game[index].Roll1) + GetRollPins(game[index].Roll2) == 10)
                 {
-                    bonus += GetRollPins(game[index].Roll1);
+                    bonus += GetRollPins(game[index + 1].Roll1);
                 }
             }
 
@@ -75,19 +85,9 @@
 
             return null;
         }
-
-        private int ConvertRollPins(string rolls, int roll)
+        private int GetRollPins(Roll? roll)
         {
-            var symbolMapper = new Dictionary<string, int>
-            {
-                { "-", 0 },
-                { "X", 10 },
-                { "/", 99 }
-            };
-
-            return symbolMapper.ContainsKey(rolls[roll].ToString())
-                    ? symbolMapper[rolls[roll].ToString()]
-                    : int.Parse(rolls[roll].ToString());
+            return roll != null ? roll.Pins : 0;
         }
     }
 }
