@@ -4,7 +4,19 @@
     {
         public List<Rolls> Parser(string frame)
         {
-            throw new NotImplementedException();
+            return new List<Rolls>
+            {
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } }
+            };
         }
     }
 }
