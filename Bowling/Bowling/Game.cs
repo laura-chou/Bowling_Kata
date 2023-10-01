@@ -4,9 +4,12 @@
     {
         public int ShowResult(string frame)
         {
-            //var parse = new Parse();
-            //parse.Parser(frame);
-            return 0;
+            var parse = new Parse();
+            var game = parse.Parser(frame);
+
+            var score = 0;
+            game.Sum(rolls => score += rolls.FirstRoll.Pins + rolls.SecondRoll.Pins);
+            return score;
         }
     }
 }
