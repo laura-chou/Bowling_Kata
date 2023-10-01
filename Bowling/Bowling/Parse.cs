@@ -6,17 +6,25 @@
         {
             var game = frame.Split(' ').ToList();
 
+            var rolls = game.Select(rolls => new Rolls
+            {
+                FirstRoll = new Roll { Pins = GetPins(rolls[0]) },
+                SecondRoll = new Roll { Pins = GetPins(rolls[1]) }
+            });
+
+            return new List<Rolls>(rolls);
+        }
+
+        private int GetPins(char roll)
+        {
             var symbolMapper = new Dictionary<char, int>
             {
                 { '-', 0 }
             };
-            var rolls = game.Select(rolls => new Rolls
-            {
-                FirstRoll = new Roll { Pins = symbolMapper[rolls[0]] },
-                SecondRoll = new Roll { Pins = symbolMapper[rolls[1]] }
-            });
 
-            return new List<Rolls>(rolls);
+            return symbolMapper.ContainsKey(roll)
+                ? symbolMapper[roll]
+                : int.Parse(roll.ToString());
         }
     }
 }
