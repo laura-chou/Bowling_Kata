@@ -13,16 +13,16 @@ namespace Bowling
             var actual = parse.Parser("-- -- -- -- -- -- -- -- -- --");
             var expected = new List<Rolls>
             {
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls{ Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } }
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
+                new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } }
             };
             actual.Should().BeEquivalentTo(expected);
         }

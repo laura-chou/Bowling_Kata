@@ -12,8 +12,8 @@
             };
             var rolls = game.Select(rolls => new Rolls
             {
-                Roll1 = new Roll { Pins = symbolMapper[rolls[0]] },
-                Roll2 = new Roll { Pins = symbolMapper[rolls[1]] }
+                FirstRoll = new Roll { Pins = symbolMapper[rolls[0]] },
+                SecondRoll = new Roll { Pins = symbolMapper[rolls[1]] }
             });
 
             return new List<Rolls>(rolls);
