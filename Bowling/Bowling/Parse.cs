@@ -6,20 +6,34 @@
         {
             var game = frame.Split(' ').ToList();
 
+            
             var rolls = game.Select(rolls => new Rolls
             {
-                FirstRoll = new Roll { Pins = GetPins(rolls[0]) },
-                SecondRoll = new Roll { Pins = GetPins(rolls[1]) }
+                #pragma warning disable CS8601 // Possible null reference assignment.
+                FirstRoll = GetRoll(rolls, 0),
+                SecondRoll = GetRoll(rolls, 1),
+                ThirdRoll = GetRoll(rolls, 2)
             });
 
             return new List<Rolls>(rolls);
+        }
+
+        private Roll? GetRoll(string rolls, int index)
+        {
+            if (rolls.Length > index)
+            {
+                return new Roll { Pins = GetPins(rolls[index]) };
+            }
+
+            return null;
         }
 
         private int GetPins(char roll)
         {
             var symbolMapper = new Dictionary<char, int>
             {
-                { '-', 0 }
+                { '-', 0 },
+                { 'X', 10}
             };
 
             return symbolMapper.ContainsKey(roll)
