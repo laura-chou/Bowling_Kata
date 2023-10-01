@@ -20,6 +20,13 @@ namespace Bowling
         {
             AssertResultShouldReturn(frame, expected);
         }
+        
+        [Test]
+        [TestCase("11 11 11 11 11 11 11 11 11 11", 20)]
+        public void A02_AllRollNotKnockedDownAllPins(string frame, int expected)
+        {
+            AssertResultShouldReturn(frame, expected);
+        }
 
         public void AssertResultShouldReturn(string frame, int expected)
         {
