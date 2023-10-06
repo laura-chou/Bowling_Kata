@@ -6,11 +6,18 @@ namespace Bowling
     [TestFixture]
     public class ParseTest
     {
+        private Parse _parse;
+        
+        [SetUp]
+        public void SetUp()
+        {
+            _parse = new Parse();
+        }
+
         [Test]
         public void A01_ParserFrameWithHyphenSymbol()
         {
-            var parse = new Parse();
-            var actual = parse.Parser("-- -- -- -- -- -- -- -- -- --");
+            var actual = _parse.Parser("-- -- -- -- -- -- -- -- -- --");
             var expected = new List<Rolls>
             {
                 new Rolls{ FirstRoll = new Roll { Pins = 0 }, SecondRoll = new Roll { Pins = 0 } },
@@ -30,8 +37,7 @@ namespace Bowling
         [Test]
         public void A02_ParserFrameWithXSymbol()
         {
-            var parse = new Parse();
-            var actual = parse.Parser("X X X X X X X X X XXX");
+            var actual = _parse.Parser("X X X X X X X X X XXX");
             var expected = new List<Rolls>
             {
                 new Rolls{ FirstRoll = new Roll { Pins = 10 }, SecondRoll = null, ThirdRoll = null },
