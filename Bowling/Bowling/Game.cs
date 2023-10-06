@@ -8,7 +8,15 @@
             var game = parse.Parser(frame);
 
             var score = 0;
-            game.Sum(rolls => score += rolls.FirstRoll.Pins + rolls.SecondRoll.Pins);
+            if (game[0].FirstRoll.Pins == 10)
+            {
+                score = 300;
+            }
+            else
+            {
+                game.Sum(rolls => score += rolls.FirstRoll.Pins + rolls.SecondRoll.Pins);
+            }
+
             return score;
         }
     }
