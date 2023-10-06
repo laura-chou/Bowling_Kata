@@ -30,6 +30,13 @@ namespace Bowling
             AssertResultShouldReturn(frame, expected);
         }
 
+        [Test]
+        [TestCase("X X X X X X X X X XXX", 300)]
+        public void A03_PerfectGame(string frame, int expected)
+        {
+            AssertResultShouldReturn(frame, expected);
+        }
+
         public void AssertResultShouldReturn(string frame, int expected)
         {
             var actual = _game.ShowResult(frame);
