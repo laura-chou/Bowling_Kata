@@ -10,23 +10,16 @@ namespace Bowling
             var game = parse.Parser(frame);
 
             var score = 0;
-            if (game[0].FirstRoll.Pins == 10)
+            var index = 0;
+            game.ForEach(rolls =>
             {
-                var index = 0;
-                game.ForEach(rolls =>
+                score += GetFirstRollPins(rolls) + GetSecondRollPins(rolls) + GetThirdRollPins(rolls);
+                if (IsStrike(rolls))
                 {
-                    score += GetFirstRollPins(rolls) + GetSecondRollPins(rolls) + GetThirdRollPins(rolls);
-                    if (IsStrike(rolls))
-                    {
-                        score += GetStrikeBonus(game, index);
-                    }
-                    index++;
-                });
-            }
-            else
-            {
-                game.Sum(rolls => score += GetFirstRollPins(rolls) + GetSecondRollPins(rolls));
-            }
+                    score += GetStrikeBonus(game, index);
+                }
+                index++;
+            });
 
             return score;
         }
