@@ -15,7 +15,11 @@ namespace Bowling
                 var index = 0;
                 game.ForEach(rolls =>
                 {
-                    score += GetFirstRollPins(rolls) + GetBonus(game, index) + GetSecondRollPins(rolls) + GetThirdRollPins(rolls);
+                    score += GetFirstRollPins(rolls) + GetSecondRollPins(rolls) + GetThirdRollPins(rolls);
+                    if (IsStrike(rolls))
+                    {
+                        score += GetStrikeBonus(game, index);
+                    }
                     index++;
                 });
             }
@@ -27,15 +31,17 @@ namespace Bowling
             return score;
         }
 
-        private int GetBonus(List<Rolls> game, int index)
+        private bool IsStrike(Rolls rolls)
+        {
+            return !HaveThisRoll(rolls.SecondRoll);
+        }
+
+        private int GetStrikeBonus(List<Rolls> game, int index)
         {
             var bonus = 0;
-            if (!HaveThisRoll(game[index].SecondRoll))
-            {
-                bonus += game[index + 1].FirstRoll.Pins;
-                #pragma warning disable CS8602 // Dereference of a possibly null reference.
-                bonus += HaveThisRoll(game[index + 1].SecondRoll) ? game[index + 1].SecondRoll.Pins : game[index + 2].FirstRoll.Pins;
-            }
+            bonus += game[index + 1].FirstRoll.Pins;
+            #pragma warning disable CS8602 // Dereference of a possibly null reference.
+            bonus += HaveThisRoll(game[index + 1].SecondRoll) ? game[index + 1].SecondRoll.Pins : game[index + 2].FirstRoll.Pins;
             return bonus;
         }
 
