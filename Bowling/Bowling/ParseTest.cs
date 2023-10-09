@@ -53,5 +53,25 @@ namespace Bowling
             };
             actual.Should().BeEquivalentTo(expected);
         }
+
+        [Test]
+        public void A03_ParserFrameWithSlashSymbol()
+        {
+            var actual = _parse.Parser("8/ 11 11 11 11 11 11 11 11 11");
+            var expected = new List<Rolls>
+            {
+                new Rolls{ FirstRoll = new Roll { Pins = 8 }, SecondRoll = new Roll { Pins = 2 }, ThirdRoll = null },
+                new Rolls{ FirstRoll = new Roll { Pins = 1 }, SecondRoll = new Roll { Pins = 1 }, ThirdRoll = null },
+                new Rolls{ FirstRoll = new Roll { Pins = 1 }, SecondRoll = new Roll { Pins = 1 }, ThirdRoll = null },
+                new Rolls{ FirstRoll = new Roll { Pins = 1 }, SecondRoll = new Roll { Pins = 1 }, ThirdRoll = null },
+                new Rolls{ FirstRoll = new Roll { Pins = 1 }, SecondRoll = new Roll { Pins = 1 }, ThirdRoll = null },
+                new Rolls{ FirstRoll = new Roll { Pins = 1 }, SecondRoll = new Roll { Pins = 1 }, ThirdRoll = null },
+                new Rolls{ FirstRoll = new Roll { Pins = 1 }, SecondRoll = new Roll { Pins = 1 }, ThirdRoll = null },
+                new Rolls{ FirstRoll = new Roll { Pins = 1 }, SecondRoll = new Roll { Pins = 1 }, ThirdRoll = null },
+                new Rolls{ FirstRoll = new Roll { Pins = 1 }, SecondRoll = new Roll { Pins = 1 }, ThirdRoll = null },
+                new Rolls{ FirstRoll = new Roll { Pins = 1 }, SecondRoll = new Roll { Pins = 1 }, ThirdRoll = null }
+            };
+            actual.Should().BeEquivalentTo(expected);
+        }
     }
 }
