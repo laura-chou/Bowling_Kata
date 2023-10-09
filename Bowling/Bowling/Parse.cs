@@ -22,6 +22,10 @@
         {
             if (rolls.Length > index)
             {
+                if (GetPins(rolls[index]) == 99)
+                {
+                    return new Roll { Pins = 2 };
+                }
                 return new Roll { Pins = GetPins(rolls[index]) };
             }
 
@@ -33,7 +37,8 @@
             var symbolMapper = new Dictionary<char, int>
             {
                 { '-', 0 },
-                { 'X', 10}
+                { 'X', 10 },
+                { '/', 99 },
             };
 
             return symbolMapper.ContainsKey(roll)
