@@ -46,6 +46,13 @@ namespace Bowling
             AssertResultShouldReturn(frame, expected);
         }
 
+        [Test]
+        [TestCase("8/ 11 11 11 11 11 11 11 11 11", 29)]
+        public void A05_OnlyOneSpare(string frame, int expected)
+        {
+            AssertResultShouldReturn(frame, expected);
+        }
+
         public void AssertResultShouldReturn(string frame, int expected)
         {
             var actual = _game.ShowResult(frame);
