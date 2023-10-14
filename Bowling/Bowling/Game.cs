@@ -18,6 +18,10 @@ namespace Bowling
                 {
                     score += GetStrikeBonus(game, index);
                 }
+                if (GetFirstRollPins(rolls) + GetSecondRollPins(rolls) == 10 && GetFirstRollPins(rolls) != 10)
+                {
+                    score += 1;
+                }
                 index++;
             });
 
