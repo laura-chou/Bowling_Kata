@@ -14,18 +14,26 @@ namespace Bowling
             game.ForEach(rolls =>
             {
                 score += GetFirstRollPins(rolls) + GetSecondRollPins(rolls) + GetThirdRollPins(rolls);
-                if (IsStrike(rolls))
+                if (!IsLastRolls(index))
                 {
-                    score += GetStrikeBonus(game, index);
-                }
-                if (IsSpare(rolls))
-                {
-                    score += GetSpareBonus(game, index);
+                    if (IsStrike(rolls))
+                    {
+                        score += GetStrikeBonus(game, index);
+                    }
+                    if (IsSpare(rolls))
+                    {
+                        score += GetSpareBonus(game, index);
+                    }
                 }
                 index++;
             });
 
             return score;
+        }
+
+        private bool IsLastRolls(int index)
+        {
+            return index + 1 == 10;
         }
 
         private int GetFirstRollPins(Rolls rolls)
