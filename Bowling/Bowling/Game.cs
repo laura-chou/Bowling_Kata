@@ -18,28 +18,14 @@ namespace Bowling
                 {
                     score += GetStrikeBonus(game, index);
                 }
-                if (GetFirstRollPins(rolls) + GetSecondRollPins(rolls) == 10 && GetFirstRollPins(rolls) != 10)
+                if (IsSpare(rolls))
                 {
-                    score += 1;
+                    score += GetSpareBonus(game, index);
                 }
                 index++;
             });
 
             return score;
-        }
-
-        private bool IsStrike(Rolls rolls)
-        {
-            return !HaveThisRoll(rolls.SecondRoll);
-        }
-
-        private int GetStrikeBonus(List<Rolls> game, int index)
-        {
-            var bonus = 0;
-            bonus += game[index + 1].FirstRoll.Pins;
-            #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            bonus += HaveThisRoll(game[index + 1].SecondRoll) ? game[index + 1].SecondRoll.Pins : game[index + 2].FirstRoll.Pins;
-            return bonus;
         }
 
         private int GetFirstRollPins(Rolls rolls)
@@ -52,6 +38,20 @@ namespace Bowling
             return HaveThisRoll(rolls.SecondRoll) ? rolls.SecondRoll.Pins : 0;
         }
 
+        private int GetSpareBonus(List<Rolls> game, int index)
+        {
+            return game[index + 1].FirstRoll.Pins;
+        }
+
+        private int GetStrikeBonus(List<Rolls> game, int index)
+        {
+            var bonus = 0;
+            bonus += game[index + 1].FirstRoll.Pins;
+            #pragma warning disable CS8602 // Dereference of a possibly null reference.
+            bonus += HaveThisRoll(game[index + 1].SecondRoll) ? game[index + 1].SecondRoll.Pins : game[index + 2].FirstRoll.Pins;
+            return bonus;
+        }
+
         private int GetThirdRollPins(Rolls rolls)
         {
             return HaveThisRoll(rolls.ThirdRoll) ? rolls.ThirdRoll.Pins : 0;
@@ -60,6 +60,16 @@ namespace Bowling
         private bool HaveThisRoll(Roll? roll)
         {
             return roll != null;
+        }
+
+        private bool IsSpare(Rolls rolls)
+        {
+            return GetFirstRollPins(rolls) != 10 && GetFirstRollPins(rolls) + GetSecondRollPins(rolls) == 10;
+        }
+
+        private bool IsStrike(Rolls rolls)
+        {
+            return !HaveThisRoll(rolls.SecondRoll);
         }
     }
 }
