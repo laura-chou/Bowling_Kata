@@ -24,7 +24,7 @@
             {
                 if (GetPins(rolls[index]) == 99)
                 {
-                    return new Roll { Pins = 2 };
+                    return new Roll { Pins = 10 - GetPins(rolls[0]) };
                 }
                 return new Roll { Pins = GetPins(rolls[index]) };
             }
