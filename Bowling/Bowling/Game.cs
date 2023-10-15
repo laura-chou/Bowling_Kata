@@ -43,6 +43,7 @@ namespace Bowling
 
         private int GetSecondRollPins(Rolls rolls)
         {
+            #pragma warning disable CS8602 // Dereference of a possibly null reference.
             return HaveThisRoll(rolls.SecondRoll) ? rolls.SecondRoll.Pins : 0;
         }
 

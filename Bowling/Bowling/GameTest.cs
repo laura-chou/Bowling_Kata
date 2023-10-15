@@ -54,6 +54,13 @@ namespace Bowling
         {
             AssertResultShouldReturn(frame, expected);
         }
+        
+        [Test]
+        [TestCase("52 8/ X 9- X X -/ 81 6/ 6/X", 158)]
+        public void A06_RandomGames(string frame, int expected)
+        {
+            AssertResultShouldReturn(frame, expected);
+        }
 
         public void AssertResultShouldReturn(string frame, int expected)
         {
