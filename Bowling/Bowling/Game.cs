@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Bowling
 {
-    public class Game
+    public class Game : BaseMethod
     {
         public int ShowResult(string frame)
         {
@@ -14,26 +15,22 @@ namespace Bowling
             game.ForEach(rolls =>
             {
                 score += GetFirstRollPins(rolls) + GetSecondRollPins(rolls) + GetThirdRollPins(rolls);
-                if (!IsLastRolls(index))
+                
+                IType type = new Gutter();
+                if (IsStrike(rolls))
                 {
-                    if (IsStrike(rolls))
-                    {
-                        score += GetStrikeBonus(game, index);
-                    }
-                    if (IsSpare(rolls))
-                    {
-                        score += GetSpareBonus(game, index);
-                    }
+                    type = new Strike(game);
                 }
+                if (IsSpare(rolls))
+                {
+                    type = new Spare(game);
+                }
+                score += type.GetBonus(index);
+                
                 index++;
             });
 
             return score;
-        }
-
-        private bool IsLastRolls(int index)
-        {
-            return index + 1 == 10;
         }
 
         private int GetFirstRollPins(Rolls rolls)
@@ -47,28 +44,9 @@ namespace Bowling
             return HaveThisRoll(rolls.SecondRoll) ? rolls.SecondRoll.Pins : 0;
         }
 
-        private int GetSpareBonus(List<Rolls> game, int index)
-        {
-            return game[index + 1].FirstRoll.Pins;
-        }
-
-        private int GetStrikeBonus(List<Rolls> game, int index)
-        {
-            var bonus = 0;
-            bonus += game[index + 1].FirstRoll.Pins;
-            #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            bonus += HaveThisRoll(game[index + 1].SecondRoll) ? game[index + 1].SecondRoll.Pins : game[index + 2].FirstRoll.Pins;
-            return bonus;
-        }
-
         private int GetThirdRollPins(Rolls rolls)
         {
             return HaveThisRoll(rolls.ThirdRoll) ? rolls.ThirdRoll.Pins : 0;
-        }
-
-        private bool HaveThisRoll(Roll? roll)
-        {
-            return roll != null;
         }
 
         private bool IsSpare(Rolls rolls)
