@@ -4,19 +4,25 @@
     {
         public List<Rolls> Parser(string frame)
         {
-            return new List<Rolls>
+            var game = frame.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var rolls = game.Select(rolls =>
             {
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+                return new Rolls
+                {
+                    Roll1 = new Roll { Pins = GetPins(rolls[0].ToString()) },
+                    Roll2 = new Roll { Pins = GetPins(rolls[1].ToString()) }
+                };
+            }).ToList();
+            return new List<Rolls>(rolls);
+        }
+
+        private int GetPins(string roll)
+        {
+            var symbolMapper = new Dictionary<string, int>
+            {
+                { "-", 0 }
             };
+            return symbolMapper[roll];
         }
     }
 }
