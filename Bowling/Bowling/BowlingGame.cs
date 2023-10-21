@@ -4,7 +4,7 @@
     {
         public int GameScore(string frame)
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }
