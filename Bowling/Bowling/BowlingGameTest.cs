@@ -6,12 +6,25 @@ namespace Bowling
     [TestFixture]
     public class BowlingGameTest
     {
-        [Test]
-        public void A01_GutterGame()
+        private BowlingGame _game;
+
+        [SetUp]
+        public void SetUp()
         {
-            var game = new BowlingGame();
-            var actual = game.GameScore("-- -- -- -- -- -- -- -- -- --");
-            actual.Should().Be(0);
+            _game = new BowlingGame();
+        }
+
+        [Test]
+        [TestCase("-- -- -- -- -- -- -- -- -- --", 0)]
+        public void A01_GutterGame(string frame, int expected)
+        {
+            AssertResultShouldReturn(frame, expected);
+        }
+
+        private void AssertResultShouldReturn(string frame, int expected)
+        {
+            var actual = _game.GameScore(frame);
+            actual.Should().Be(expected);
         }
     }
 }
