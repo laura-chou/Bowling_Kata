@@ -18,11 +18,12 @@
 
         private int GetPins(string roll)
         {
-            var symbolMapper = new Dictionary<string, int>
+            var symbolMapper = new Dictionary<string, ICategory>
             {
-                { "-", 0 }
+                { "-", new GutterBall()}
             };
-            return symbolMapper[roll];
+            ICategory category = symbolMapper[roll];
+            return category.GetPins(roll);
         }
     }
 }
