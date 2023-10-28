@@ -22,7 +22,7 @@
             {
                 { "-", new GutterBall()}
             };
-            ICategory category = symbolMapper[roll];
+            ICategory category = symbolMapper.ContainsKey(roll) ? symbolMapper[roll] : new Normal(roll);
             return category.GetPins(roll);
         }
     }
