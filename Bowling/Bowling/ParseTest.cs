@@ -15,7 +15,7 @@ namespace Bowling
         }
 
         [Test]
-        public void A01_ParserFrame()
+        public void A01_ParserFrameWithHyphenSymbol()
         {
             var input = "-- -- -- -- -- -- -- -- -- --";
             var expected = new List<Rolls>
@@ -30,6 +30,26 @@ namespace Bowling
                 new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
                 new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
                 new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
+            };
+            AssetResultShouldReturn(input, expected);
+        }
+        
+        [Test]
+        public void A02_ParserFrameWithNumber()
+        {
+            var input = "11 11 11 11 11 11 11 11 11 11";
+            var expected = new List<Rolls>
+            {
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
             };
             AssetResultShouldReturn(input, expected);
         }
