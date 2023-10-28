@@ -9,7 +9,7 @@ namespace Bowling
         private Parse _parse;
 
         [SetUp]
-        public void SetUp()
+        public void A00_SetUp()
         {
             _parse = new Parse();
         }
@@ -18,39 +18,16 @@ namespace Bowling
         public void A01_ParserFrameWithHyphenSymbol()
         {
             var input = "-- -- -- -- -- -- -- -- -- --";
-            var expected = new List<Rolls>
-            {
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-                new Rolls { Roll1 = new Roll { Pins = 0 }, Roll2 = new Roll { Pins = 0 } },
-            };
+            var expected = new List<Rolls>(DuplicateRolls(0, 0));
+
             AssetResultShouldReturn(input, expected);
         }
-        
+
         [Test]
         public void A02_ParserFrameWithNumber()
         {
             var input = "11 11 11 11 11 11 11 11 11 11";
-            var expected = new List<Rolls>
-            {
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-                new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
-            };
+            var expected = new List<Rolls>(DuplicateRolls(1, 1));
             AssetResultShouldReturn(input, expected);
         }
 
@@ -58,6 +35,16 @@ namespace Bowling
         {
             var actual = _parse.Parser(input);
             actual.Should().BeEquivalentTo(expected);
+        }
+
+        private List<Rolls> DuplicateRolls(int roll1Pins, int roll2Pins)
+        {
+            var rollList = new List<Rolls>();
+            for (int i = 0; i < 10; i++)
+            {
+                rollList.Add(new Rolls { Roll1 = new Roll { Pins = roll1Pins }, Roll2 = new Roll { Pins = roll2Pins } });
+            }
+            return rollList;
         }
     }
 }
