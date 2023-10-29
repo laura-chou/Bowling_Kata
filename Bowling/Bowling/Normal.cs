@@ -9,8 +9,6 @@
             this.rollPins = rollPins;
         }
 
-        public string Symbol => rollPins;
-
         public int Pins => int.Parse(rollPins);
 
         public int GetPins(string roll)
