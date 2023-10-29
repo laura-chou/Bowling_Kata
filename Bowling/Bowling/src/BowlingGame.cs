@@ -8,14 +8,27 @@
             var parse = new Parse();
             var game = parse.Parser(frame);
 
-            if (game[0].Roll2 == null)
+            var score = 0;
+            var index = 0;
+            game.ForEach(rolls =>
             {
-                return 300;
-            }
-
-            var score = game.Sum(rolls => rolls.Roll1.Pins + rolls.Roll2.Pins);
+                score += GetRollPins(rolls.Roll1) + GetRollPins(rolls.Roll2) + GetRollPins(rolls.Roll3);
+                if (rolls.Roll2 == null)
+                {
+                    score += game[index + 1].Roll1.Pins;
+                    score += (game[index + 1].Roll2 == null) 
+                            ? game[index + 2].Roll1.Pins 
+                            : game[index + 1].Roll2.Pins;
+                }
+                index++;
+            });
 
             return score;
+        }
+
+        private int GetRollPins(Roll? roll)
+        {
+            return roll != null ? roll.Pins : 0;
         }
     }
 }
