@@ -7,26 +7,12 @@
             var game = frame.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             var rolls = game.Select(rolls =>
             {
-                if (rolls[0] == 'X') {
-                    if (rolls.Length > 1)
-                    {
-                        return new Rolls
-                        {
-                            Roll1 = new Roll { Pins = 10 },
-                            Roll2 = new Roll { Pins = 10 },
-                            Roll3 = new Roll { Pins = 10 }
-                        };
-                    }
-                    return new Rolls
-                    {
-                        Roll1 = new Roll { Pins = 10},
-                        Roll2 = null
-                    };
-                }
+                #pragma warning disable CS8601 // Possible null reference assignment.
                 return new Rolls
                 {
-                    Roll1 = new Roll { Pins = GetPins(rolls[0].ToString()) },
-                    Roll2 = new Roll { Pins = GetPins(rolls[1].ToString()) }
+                    Roll1 = GetRoll(rolls, 0),
+                    Roll2 = GetRoll(rolls, 1),
+                    Roll3 = GetRoll(rolls, 2)
                 };
             }).ToList();
             return new List<Rolls>(rolls);
@@ -36,10 +22,20 @@
         {
             var symbolMapper = new Dictionary<string, ICategory>
             {
-                { "-", new GutterBall()}
+                { "-", new GutterBall()},
+                { "X", new Strike()}
             };
             ICategory category = symbolMapper.ContainsKey(roll) ? symbolMapper[roll] : new Normal(roll);
             return category.GetPins(roll);
+        }
+
+        private Roll? GetRoll(string rolls, int index)
+        {
+            if (index < rolls.Length)
+            {
+                return new Roll { Pins = GetPins(rolls[index].ToString()) };
+            }
+            return null;
         }
     }
 }
