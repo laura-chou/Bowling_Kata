@@ -6,5 +6,6 @@
         public Roll Roll1 { get; set; }
 
         public Roll? Roll2 { get; set; }
+        public Roll? Roll3 { get; set; }
     }
 }

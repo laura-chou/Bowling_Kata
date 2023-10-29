@@ -30,6 +30,26 @@ namespace Bowling
             var expected = new List<Rolls>(DuplicateRolls(1, 1));
             AssetResultShouldReturn(input, expected);
         }
+        
+        [Test]
+        public void A03_ParserFrameWithXSymbol()
+        {
+            var input = "X X X X X X X X X XXX";
+            var expected = new List<Rolls>
+            {
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = null },
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = null },
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = null },
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = null },
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = null },
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = null },
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = null },
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = null },
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = null },
+              new Rolls { Roll1 = new Roll { Pins = 10 }, Roll2 = new Roll { Pins = 10 }, Roll3 = new Roll { Pins = 10 } }
+            };
+            AssetResultShouldReturn(input, expected);
+        }
 
         private void AssetResultShouldReturn(string input, List<Rolls> expected)
         {
