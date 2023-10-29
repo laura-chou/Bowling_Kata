@@ -1,5 +1,8 @@
-﻿namespace Bowling
+﻿using Bowling.src.Categories;
+
+namespace Bowling.src
 {
+    #pragma warning disable CS8601 // Possible null reference assignment.
     public class Parse
     {
         public List<Rolls> Parser(string frame)
@@ -7,7 +10,6 @@
             var game = frame.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             var rolls = game.Select(rolls =>
             {
-                #pragma warning disable CS8601 // Possible null reference assignment.
                 return new Rolls
                 {
                     Roll1 = GetRoll(rolls, 0),

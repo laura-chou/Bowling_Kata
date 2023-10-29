@@ -1,4 +1,4 @@
-﻿namespace Bowling
+﻿namespace Bowling.src.Categories
 {
     public class Strike : ICategory
     {

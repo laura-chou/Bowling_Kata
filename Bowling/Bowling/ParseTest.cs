@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using FluentAssertions;
+using Bowling.src;
 
 namespace Bowling
 {

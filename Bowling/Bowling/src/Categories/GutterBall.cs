@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Bowling
+namespace Bowling.src.Categories
 {
     public class GutterBall : ICategory
     {

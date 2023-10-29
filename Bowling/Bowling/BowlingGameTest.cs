@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
+﻿using Bowling.src;
+using FluentAssertions;
 using NUnit.Framework;
-using System.Net.NetworkInformation;
 
 namespace Bowling
 {
