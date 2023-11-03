@@ -15,10 +15,7 @@
                 score += GetRollPins(rolls.Roll1) + GetRollPins(rolls.Roll2) + GetRollPins(rolls.Roll3);
                 if (rolls.Roll2 == null)
                 {
-                    score += game[index + 1].Roll1.Pins;
-                    score += (game[index + 1].Roll2 == null) 
-                            ? game[index + 2].Roll1.Pins 
-                            : game[index + 1].Roll2.Pins;
+                    score += GetStrikeBonus(game, index);
                 }
                 index++;
             });
@@ -29,6 +26,16 @@
         private int GetRollPins(Roll? roll)
         {
             return roll != null ? roll.Pins : 0;
+        }
+
+        private int GetStrikeBonus(List<Rolls> game, int index)
+        {
+            int bonus = 0;
+            bonus += game[index + 1].Roll1.Pins;
+            bonus += game[index + 1].Roll2 == null
+                    ? game[index + 2].Roll1.Pins
+                    : game[index + 1].Roll2.Pins;
+            return bonus;
         }
     }
 }
