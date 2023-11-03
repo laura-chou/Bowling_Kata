@@ -37,6 +37,13 @@ namespace Bowling
         {
             AssertResultShouldReturn(frame, expected);
         }
+        
+        [Test]
+        [TestCase("X 11 11 11 11 11 11 11 11 11", 30)]
+        public void A04_OneStrike(string frame, int expected)
+        {
+            AssertResultShouldReturn(frame, expected);
+        }
 
         private void AssertResultShouldReturn(string frame, int expected)
         {
