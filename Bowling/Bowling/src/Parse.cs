@@ -25,7 +25,8 @@ namespace Bowling.src
             var symbolMapper = new Dictionary<string, ICategory>
             {
                 { "-", new GutterBall()},
-                { "X", new Strike()}
+                { "X", new Strike()},
+                { "/", new Spare()}
             };
             ICategory category = symbolMapper.ContainsKey(roll) ? symbolMapper[roll] : new Normal(roll);
             return category.GetPins(roll);
