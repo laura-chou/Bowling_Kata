@@ -52,6 +52,26 @@ namespace Bowling
             AssetResultShouldReturn(input, expected);
         }
 
+        [Test]
+        public void A04_ParserFrameWithSlashSymbol()
+        {
+            var input = "8/ 11 11 11 11 11 11 11 11 11";
+            var expected = new List<Rolls>
+            {
+              new Rolls { Roll1 = new Roll { Pins = 8 }, Roll2 = new Roll { Pins = 2 } },
+              new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+              new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+              new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+              new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+              new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+              new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+              new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+              new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } },
+              new Rolls { Roll1 = new Roll { Pins = 1 }, Roll2 = new Roll { Pins = 1 } }
+            };
+            AssetResultShouldReturn(input, expected);
+        }
+
         private void AssetResultShouldReturn(string input, List<Rolls> expected)
         {
             var actual = _parse.Parser(input);
