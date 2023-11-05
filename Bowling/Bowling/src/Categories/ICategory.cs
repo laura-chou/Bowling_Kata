@@ -2,6 +2,6 @@
 {
     public interface ICategory
     {
-        int GetPins(string roll);
+        int GetPins();
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Strike : ICategory
     {
-        public int GetPins(string roll)
+        public int GetPins()
         {
             return 10;
         }

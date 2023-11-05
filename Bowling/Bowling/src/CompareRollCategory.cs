@@ -29,8 +29,8 @@ namespace Bowling.src
                 { "X", new Strike()},
                 { "/", new Spare(rolls[0].ToString())}
             };
-            ICategory category = symbolMapper.ContainsKey(roll) ? symbolMapper[roll] : new Normal();
-            return category.GetPins(roll);
+            ICategory category = symbolMapper.ContainsKey(roll) ? symbolMapper[roll] : new Normal(roll);
+            return category.GetPins();
         }
     }
 }

@@ -2,9 +2,16 @@
 {
     public class Normal : ICategory
     {
-        public int GetPins(string roll)
+        private readonly string RollPins;
+
+        public Normal(string pins)
         {
-            return int.Parse(roll);
+            this.RollPins = pins;
+        }
+
+        public int GetPins()
+        {
+            return int.Parse(RollPins);
         }
     }
 }
