@@ -1,4 +1,5 @@
 ﻿using Bowling.src.Categories;
+using System.Text;
 
 namespace Bowling.src
 {
@@ -26,9 +27,8 @@ namespace Bowling.src
             {
                 { "-", new GutterBall()},
                 { "X", new Strike()},
-                { "/", new Spare()}
+                { "/", new Spare(rolls[0].ToString())}
             };
-
             ICategory category = symbolMapper.ContainsKey(roll) ? symbolMapper[roll] : new Normal();
             return category.GetPins(roll);
         }
