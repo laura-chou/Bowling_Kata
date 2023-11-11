@@ -16,7 +16,14 @@
                 if (rolls.Roll2 == null)
                 {
                     score += GetStrikeBonus(game, index);
+                } else
+                {
+                    if (rolls.Roll1.Pins + rolls.Roll2.Pins == 10)
+                    {
+                        score += 1;
+                    }
                 }
+
                 index++;
             });
 
