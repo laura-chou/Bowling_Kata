@@ -38,7 +38,12 @@
 
         private int GetSpareBonus(List<Rolls> game, int index)
         {
-            return game[index + 1].Roll1.Pins;
+            int bonus = 0;
+            if (index + 1 < 10)
+            {
+                return game[index + 1].Roll1.Pins;
+            }
+            return bonus;
         }
 
         private int GetStrikeBonus(List<Rolls> game, int index)
