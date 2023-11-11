@@ -6,7 +6,7 @@
 
         public Spare(string pins)
         {
-            this.FirstRollPins = pins;
+            this.FirstRollPins = pins != "-" ? pins : "0";
         }
 
         public int GetPins()
