@@ -16,11 +16,12 @@
                 if (rolls.Roll2 == null)
                 {
                     score += GetStrikeBonus(game, index);
-                } else
+                } 
+                else
                 {
                     if (rolls.Roll1.Pins + rolls.Roll2.Pins == 10)
                     {
-                        score += 1;
+                        score += GetSpareBonus(game, index);
                     }
                 }
 
@@ -33,6 +34,11 @@
         private int GetRollPins(Roll? roll)
         {
             return roll != null ? roll.Pins : 0;
+        }
+
+        private int GetSpareBonus(List<Rolls> game, int index)
+        {
+            return game[index + 1].Roll1.Pins;
         }
 
         private int GetStrikeBonus(List<Rolls> game, int index)
