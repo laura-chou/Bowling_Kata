@@ -13,13 +13,13 @@
             game.ForEach(rolls =>
             {
                 score += GetRollPins(rolls.Roll1) + GetRollPins(rolls.Roll2) + GetRollPins(rolls.Roll3);
-                if (rolls.Roll2 == null)
+                if (IsStrike(rolls))
                 {
                     score += GetStrikeBonus(game, index);
-                } 
+                }
                 else
                 {
-                    if (rolls.Roll1.Pins + rolls.Roll2.Pins == 10)
+                    if (IsSpare(rolls))
                     {
                         score += GetSpareBonus(game, index);
                     }
@@ -49,6 +49,16 @@
                     ? game[index + 2].Roll1.Pins
                     : game[index + 1].Roll2.Pins;
             return bonus;
+        }
+
+        private bool IsSpare(Rolls rolls)
+        {
+            return rolls.Roll1.Pins + rolls.Roll2.Pins == 10;
+        }
+
+        private bool IsStrike(Rolls rolls)
+        {
+            return rolls.Roll2 == null;
         }
     }
 }
