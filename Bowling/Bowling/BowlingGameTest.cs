@@ -60,6 +60,7 @@ namespace Bowling
         [TestCase("52 8/ X 9- X X -/ 81 6/ 6/X", 158)]
         [TestCase("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5", 150)]
         [TestCase("6/ X 1- X X -8 9/ 35 4- X34", 120)]
+        [TestCase("X 9/ X 7/ X 2/ X 5/ X 1/X", 200)]
         public void A06_RandomGames(string frame, int expected)
         {
             AssertResultShouldReturn(frame, expected);
