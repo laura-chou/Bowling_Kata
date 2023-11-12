@@ -16,20 +16,32 @@ namespace Bowling.src
         {
             if (round < rolls.Length)
             {
-                return new Roll { Pins = GetPins(rolls[round].ToString()) };
+                return new Roll { Pins = GetPins(rolls[round].ToString()), Category = GetCategory(rolls[round].ToString()) };
             }
             return null;
         }
 
+        private Category GetCategory(string roll)
+        {
+            var symbolMapper = new Dictionary<string, Category>
+            {
+                { "-", Category.GutterBall},
+                { "X", Category.Strike},
+                { "/", Category.Spare}
+            };
+            return symbolMapper.ContainsKey(roll) ? symbolMapper[roll] : Category.Normal;
+        }
+
         private int GetPins(string roll)
         {
-            var symbolMapper = new Dictionary<string, ICategory>
+            var categoryMapper = new Dictionary<Category, ICategory>
             {
-                { "-", new GutterBall()},
-                { "X", new Strike()},
-                { "/", new Spare(rolls[0].ToString())}
+                { Category.GutterBall, new GutterBall()},
+                { Category.Strike, new Strike()},
+                { Category.Spare, new Spare(rolls[0].ToString())},
+                { Category.Normal, new Normal(roll)}
             };
-            ICategory category = symbolMapper.ContainsKey(roll) ? symbolMapper[roll] : new Normal(roll);
+            ICategory category = categoryMapper[GetCategory(roll)];
             return category.GetPins();
         }
     }
